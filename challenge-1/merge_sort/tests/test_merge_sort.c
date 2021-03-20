@@ -28,7 +28,6 @@ void test_two_arrays_merge() {
                     i, expected[i], merged[i]
             );
             free(merged);
-            merged = NULL;
             exit(1);
         }
     }
@@ -52,7 +51,6 @@ void test_merge_sorted_recursive() {
                     i, expected[i], sorted[i]        
             );
             free(sorted);
-            sorted = NULL;
             exit(1);
         }
     }
