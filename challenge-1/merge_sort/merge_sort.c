@@ -14,12 +14,11 @@ double* merge_sorted_recursive(size_t len, double ar[len]) {
     double *right = array_slice(ar, len / 2, len);
     
     double *left_sorted = merge_sorted_recursive(left_size, left);
+    free(left);
     double *right_sorted = merge_sorted_recursive(right_size, right);
+    free(right);
 
     double *sorted = two_arrays_merge(left_size, right_size, left_sorted, right_sorted);
-    
-    free(left);
-    free(right);
     free(left_sorted);
     free(right_sorted);
     
