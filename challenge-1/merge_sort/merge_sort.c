@@ -12,13 +12,18 @@ double* merge_sorted_recursive(size_t len, double ar[len]) {
     size_t right_size = len - len / 2;
     double *left = array_slice(ar, 0, len / 2); 
     double *right = array_slice(ar, len / 2, len);
+    
+    double *left_sorted = merge_sorted_recursive(left_size, left);
+    double *right_sorted = merge_sorted_recursive(right_size, right);
 
-    return two_arrays_merge(
-            left_size, 
-            right_size, 
-            merge_sorted_recursive(left_size, left), 
-            merge_sorted_recursive(right_size, right)
-    );
+    double *sorted = two_arrays_merge(left_size, right_size, left_sorted, right_sorted);
+    
+    free(left);
+    free(right);
+    free(left_sorted);
+    free(right_sorted);
+    
+    return sorted;
 }
 
 double* array_slice(double ar[], size_t i_start, size_t i_end) {
