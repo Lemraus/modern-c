@@ -3,50 +3,31 @@
 
 #include "merge_sort.h"
 
-double* merge_sorted_recursive(size_t len, double ar[len]) {
+void merge_sort(double ar[], size_t start, size_t end) {
+    size_t len = end - start;
     if (len == 1) {
-        return ar;
+        return;
     }
-
-    size_t left_size = len / 2;
-    size_t right_size = len - len / 2;
-    double *left = array_slice(ar, 0, len / 2); 
-    double *right = array_slice(ar, len / 2, len);
     
-    double *left_sorted = merge_sorted_recursive(left_size, left);
-    free(left);
-    double *right_sorted = merge_sorted_recursive(right_size, right);
-    free(right);
-
-    double *sorted = two_arrays_merge(left_size, right_size, left_sorted, right_sorted);
-    free(left_sorted);
-    free(right_sorted);
-    
-    return sorted;
+    merge_sort(ar, start, start + len / 2);
+    merge_sort(ar, start + len / 2, end);
+    merge_adjacent(ar, start, start + len / 2, start + len / 2, end);
 }
 
-double* array_slice(double ar[], size_t i_start, size_t i_end) {
-    double *slice = malloc((i_end - i_start) * sizeof(*slice));
+void merge_adjacent(double ar[], size_t a_start, size_t a_end, size_t b_start, size_t b_end) {
+    double merged[b_end - a_start];
 
-    for (int i = 0; i < i_end - i_start; ++i) {
-        slice[i] = ar[i_start + i];
-    }
-
-    return slice;
-}
-
-double* two_arrays_merge(size_t len_a, size_t len_b, double a[len_a], double b[len_b]) {
-    double *merged = malloc((len_a + len_b) * sizeof(*merged));
-
-    for (size_t i = 0, j = 0, k = 0; k < len_a + len_b; ++k) {
-        if (i < len_a && (j == len_b || a[i] < b[j])) {
-            merged[k] = a[i];
+    for (size_t i = a_start, j = b_start, k = 0; k < b_end - a_start; ++k) {
+        if (i < a_end && (j == b_end || ar[i] < ar[j])) {
+            merged[k] = ar[i];
             ++i;
         } else {
-            merged[k] = b[j];
+            merged[k] = ar[j];
             ++j;
         }
     }
 
-    return merged;
+    for (size_t i = 0; i < b_end - a_start; ++i) {
+        ar[a_start + i] = merged[i];
+    }
 }
