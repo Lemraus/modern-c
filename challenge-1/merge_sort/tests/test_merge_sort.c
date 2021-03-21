@@ -15,7 +15,7 @@ void test_merge_adjacent() {
     size_t len = 7;
     double ar[] = { 3, 5, 9, 1, 2, 7, 10 };
     double expected[] = { 1, 2, 3, 5, 7, 9, 10 }; 
-    merge_adjacent(ar, 0, 3, 3, len);
+    merge_adjacent(ar, 0, 3, len);
 
     for (size_t i = 0; i < len; ++i) {
         if (ar[i] != expected[i]) {
