@@ -1,6 +1,5 @@
 #include <stddef.h>
 #include <stdlib.h>
-
 #include "merge_sort.h"
 
 void merge_sort(double ar[], size_t start, size_t end) {
