@@ -16,7 +16,7 @@ int main() {
 
 double derivative(double (*f)(double), double x) {
     double dx = sqrt(EPSILON) * x;    
-    return ((*f)(x + dx) - (*f)(x)) / dx;
+    return (f(x + dx) - f(x)) / dx;
 }
 
 double square(double x) {
