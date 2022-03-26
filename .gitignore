@@ -1,5 +1,7 @@
-**/*
-!.gitignore
-!*.c
-!*.h
-!*.sh
+# Ignore executable files
+*
+!*/
+!*.*
+
+# Editor files
+.vscode
